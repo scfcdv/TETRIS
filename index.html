@@ -1,5 +1,5 @@
 <head>
-    <title>超究極完全体テトリス</title>
+    <title>テトリス</title>
     <link rel="icon" href="https://scfcdv.github.io/homeweb2/favicon.ico">
     <style>
         .gd-menu {
@@ -237,6 +237,7 @@ if(count <= 0) clearInterval(id);
       };
 
       document.onkeydown = (e) => {
+        if(sp === 0){
         if (isGameOver) return;
         switch (e.keyCode) {
           case 37: //左
@@ -251,9 +252,7 @@ if(count <= 0) clearInterval(id);
           case 38: //space
             let newTet = createRotateTet();
             if (canMove(0, 0, newTet)) {
-              tet = newTet;
-            }
-        }
+              tet = newTet;}}}
         draw();
       };
       //動きが止まったtetをボード座標に書き写す
@@ -299,7 +298,8 @@ document.getElementById('sukoaValue').textContent = sukoa;
         //下に行けたら
         if (canMove(0, 1)) {
           //下に行く
-          offsetY++;
+          if(sp === 0){
+          offsetY++;}
         } else {
           //行けなかったら固定する
           fixTet();
@@ -351,6 +351,14 @@ document.getElementById('sukoaValue').textContent = sukoa;
     <script>
     let sukoa = 0;
     </script>
+    <script>
+        document.addEventListener('keydown', function(event) {
+        if (event.keyCode === 13) {
+        if(sp === 0)
+        sp = 1;
+        else{sp=0}
+        }});
+        </script>
     <h1 class="gd-menu">score</h1>
 <h1 class="gd-menu2" id="sukoaValue">0</h1>
 <h1 class="gd-menu3">経過時間</h1>
